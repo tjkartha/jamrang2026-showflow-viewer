@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jamrang 2026 Day 1 Showflow</title>
+    <title>Jamrang 2026 Showflow</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -20,25 +20,68 @@
         
         h1 {
             margin-top: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             font-size: 28px;
             font-weight: 600;
             letter-spacing: -0.5px;
             text-align: center;
         }
 
+        /* Tab Styles */
+        .tab-container {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            background: #e4e4e7;
+            padding: 6px;
+            border-radius: 12px;
+        }
+
+        .tab {
+            padding: 8px 24px;
+            background: transparent;
+            color: #52525b;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .tab:hover {
+            color: #18181b;
+        }
+
+        .tab.active {
+            background-color: #ffffff;
+            color: #18181b;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Container Styles */
         .showflow-container {
             width: 100%;
-            max-width: 1400px; /* Limits width on ultra-wide screens */
-            flex-grow: 1; /* Makes the box fill the remaining vertical space */
+            max-width: 1400px;
+            flex-grow: 1;
             background: #ffffff;
             border-radius: 12px;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             overflow: hidden;
+            position: relative;
         }
 
-        /* Forces whatever iframe you paste to fill the container perfectly */
-        .showflow-container iframe {
+        .iframe-wrapper {
+            display: none; /* Hidden by default */
+            width: 100%;
+            height: 100%;
+        }
+
+        .iframe-wrapper.active {
+            display: block; /* Shows only the active one */
+        }
+
+        .iframe-wrapper iframe {
             width: 100%;
             height: 100%;
             border: none;
@@ -47,14 +90,40 @@
 </head>
 <body>
 
-    <h1>Jamrang 2026 Day 1 Showflow</h1>
+    <h1>Jamrang 2026 Showflow</h1>
+
+    <div class="tab-container">
+        <button class="tab active" onclick="switchTab('day1')">Day 1</button>
+        <button class="tab" onclick="switchTab('day2')">Day 2</button>
+    </div>
 
     <div class="showflow-container">
-        <!-- PASTE YOUR ONEDRIVE EMBED CODE EXACTLY OVER THE IFRAME LINE BELOW -->
         
-        <iframe src="<iframe width="700" height="685" frameborder="0" scrolling="no" src="https://vijaybhoomischool-my.sharepoint.com/personal/kunj_mistry_vijaybhoomi_edu_in/_layouts/15/Doc.aspx?sourcedoc={9df91763-ed25-4a94-ae57-5a2551d08d23}&action=embedview&ActiveCell='Day%201%20'!A14&Item='Day%201%20'!A1%3AC20&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True"></iframe>" width="402" height="346" frameborder="0" scrolling="no"></iframe>
-        
+        <!-- DAY 1 IFRAME -->
+        <div id="day1" class="iframe-wrapper active">
+            <iframe src="<iframe width="402" height="346" frameborder="0" scrolling="no" src="https://vijaybhoomischool-my.sharepoint.com/personal/kunj_mistry_vijaybhoomi_edu_in/_layouts/15/Doc.aspx?sourcedoc={9df91763-ed25-4a94-ae57-5a2551d08d23}&action=embedview&ActiveCell='Day%201%20'!A1&wdHideGridlines=True&wdHideHeaders=True&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True"></iframe>" width="402" height="346" frameborder="0" scrolling="no"></iframe>
+        </div>
+
+        <!-- DAY 2 IFRAME -->
+        <div id="day2" class="iframe-wrapper">
+            <iframe src="REPLACE_WITH_DAY_2_ONEDRIVE_LINK" width="402" height="346" frameborder="0" scrolling="no"></iframe>
+        </div>
+
     </div>
+
+    <script>
+        function switchTab(dayId) {
+            // Remove 'active' class from all tabs and wrappers
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.iframe-wrapper').forEach(wrapper => wrapper.classList.remove('active'));
+
+            // Add 'active' class to the clicked tab
+            event.target.classList.add('active');
+            
+            // Add 'active' class to the corresponding iframe wrapper
+            document.getElementById(dayId).classList.add('active');
+        }
+    </script>
 
 </body>
 </html>
